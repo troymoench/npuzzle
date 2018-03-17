@@ -6,9 +6,9 @@ class Node:
         self.parent = n
         self.state = state
         self.ucost = ucost
-        self.pcost = 0
+        self.pcost = ucost
         if self.parent:
-            self.pcost = self.parent.pcost
+            self.pcost += self.parent.pcost
         self.fcost = fcost
 
     def __eq__(self, other):

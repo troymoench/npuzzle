@@ -56,6 +56,6 @@ if __name__ == "__main__":
     f.add(Node(None, goalA, 1, 6))
     f.print()
 
-    # print(f.check(n))
-    # f.pop()
-    # f.print()
+    print(f.check(n))
+    f.pop()
+    f.print()

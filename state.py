@@ -111,18 +111,31 @@ class State:
 
         return neighbors
 
+    def manhattanDist(self, goal):
+        dist = 0
+        for val in range(1, self.n * self.n):
+            curr_loc = self.findCell(val)
+            goal_loc = goal.findCell(val)
+            dist += abs(curr_loc[0] - goal_loc[0]) + abs(curr_loc[1] - goal_loc[1])
+
+        return dist
+
+    def misplaced(self, goal):
+        num = 0
+        for val in range(1, self.n * self.n):
+            curr_loc = self.findCell(val)
+            goal_loc = goal.findCell(val)
+
+            num += (curr_loc != goal_loc)  # check if the value is misplaced
+
+        return num
+
     def print(self):
         for i in range(self.n):
-            print(" ".join(map(str, self.board[i])))
+            print(" ".join(map(lambda x: " " if x == 0 else str(x), self.board[i])))
 
 
 if __name__ == "__main__":
-    st = State(4)
-    st.print()
-    st.shuffle()
-    st.print()
-    print(st.isSolvable())
-
     goalA = State(3,
                   [[0, 1, 2],
                    [3, 4, 5],
@@ -145,6 +158,21 @@ if __name__ == "__main__":
     print(goalA.getCell(1, 2))
     print(goalA.findCell(0))
 
-    neighbors = goalB.findNeighbors()
+    neighbors = goalA.findNeighbors()
     for neighbor in neighbors:
         neighbor.print()
+
+    start = State(3,
+                  [[1, 0, 2],
+                   [3, 4, 5],
+                   [6, 7, 8]])
+    start.print()
+
+    st = State(3)
+    st.shuffle()
+    st.print()
+    print(st.isSolvable())
+    print("Manhattan distance:", start.manhattanDist(goalA))
+    print("Misplaced tiles:", start.misplaced(goalA))
+    print("Manhattan distance:", st.manhattanDist(goalA))
+    print("Misplaced tiles:", st.misplaced(goalA))
