@@ -6,6 +6,9 @@ class Frontier:
     def __init__(self):
         self.fnodes = []
 
+    def __len__(self):
+        return len(self.fnodes)
+
     def add(self, n):
 
         p = 0

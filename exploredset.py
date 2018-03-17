@@ -5,6 +5,9 @@ class ExploredSet:
     def __init__(self):
         self.exset = []
 
+    def __len__(self):
+        return len(self.exset)
+
     def add(self, n):
         self.exset.append(n)
 

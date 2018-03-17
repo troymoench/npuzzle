@@ -26,6 +26,9 @@ class Node:
         print("pcost:", self.pcost)
         print("fcost:", self.fcost)
 
+    def getPathlen(self):
+        return self.pcost
+
     def eval(self):
         return self.fcost
 

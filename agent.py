@@ -9,12 +9,13 @@ class Agent:
     def __init__(self):
         self.frontier = frontier.Frontier()
         self.exset = exploredset.ExploredSet()
+        self.numnodes = 0
 
     def search(self, start, goal, astar, heuristic):
         if heuristic == "manhattan":
             h = start.manhattanDist(goal)
         elif heuristic == "misplaced":
-            h = start.misplaced(goal)
+            h = start.misplacedTiles(goal)
         else:
             print("Invalid heuristic!")
             print("Try: 'manhattan' or 'misplaced'")
@@ -22,11 +23,12 @@ class Agent:
 
         self.frontier.add(Node(None, start, 0, h))
 
-        count = 0
         while True:
-            print("\nRound:", count, "\n")
-            print("Size of frontier:", len(self.frontier.fnodes))
-            print("Size of exset:", len(self.exset.exset))
+
+            # print("Explored nodes:", len(self.exset))
+            # print("Nodes in frontier:", len(self.frontier))
+            # print("Created nodes:", self.numnodes)
+
             if self.gDebug:
                 self.frontier.print()
                 self.exset.print()
@@ -45,10 +47,21 @@ class Agent:
                 if heuristic == "manhattan":
                     h = neighbor.manhattanDist(goal)
                 elif heuristic == "misplaced":
-                    h = neighbor.misplaced(goal)
+                    h = neighbor.misplacedTiles(goal)
 
+                if astar:
+                    h += p.getPathlen() + 1
                 n = Node(p, neighbor, 1, h)
+                self.numnodes += 1
 
                 if not self.exset.check(n):
                     self.frontier.add(n)
-            count += 1
+
+
+    def getMetrics(self, solution):
+        print(" --- Metrics -----")
+        print("Path length:", solution.getPathlen())
+        print("Explored nodes:", len(self.exset))
+        print("Nodes in frontier:", len(self.frontier))
+        print("Created nodes:", self.numnodes)
+

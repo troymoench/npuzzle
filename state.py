@@ -120,7 +120,7 @@ class State:
 
         return dist
 
-    def misplaced(self, goal):
+    def misplacedTiles(self, goal):
         num = 0
         for val in range(1, self.n * self.n):
             curr_loc = self.findCell(val)
@@ -173,6 +173,6 @@ if __name__ == "__main__":
     st.print()
     print(st.isSolvable())
     print("Manhattan distance:", start.manhattanDist(goalA))
-    print("Misplaced tiles:", start.misplaced(goalA))
+    print("Misplaced tiles:", start.misplacedTiles(goalA))
     print("Manhattan distance:", st.manhattanDist(goalA))
-    print("Misplaced tiles:", st.misplaced(goalA))
+    print("Misplaced tiles:", st.misplacedTiles(goalA))
