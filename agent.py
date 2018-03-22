@@ -25,10 +25,6 @@ class Agent:
 
         while True:
 
-            # print("Explored nodes:", len(self.exset))
-            # print("Nodes in frontier:", len(self.frontier))
-            # print("Created nodes:", self.numnodes)
-
             if self.gDebug:
                 self.frontier.print()
                 self.exset.print()
@@ -56,7 +52,6 @@ class Agent:
 
                 if not self.exset.check(n):
                     self.frontier.add(n)
-
 
     def getMetrics(self, solution):
         print(" --- Metrics -----")

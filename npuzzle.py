@@ -12,19 +12,12 @@ def main():
     while not start.isSolvable():
         start.shuffle()
 
-    goal4 = State(4,
-                  [[0, 1, 2, 3],
-                   [4, 5, 6, 7],
-                   [8, 9, 10, 11],
-                   [12, 13, 14, 15]])
-
     goal3 = State(3,
                  [[0, 1, 2],
                   [3, 4, 5],
                   [6, 7, 8]])
     a = Agent()
     a.gDebug = False
-    heuristic = "manhattan"  # manhattan or misplaced
 
     print("N Puzzle")
     print("A* or Best First Search\n")
@@ -33,6 +26,12 @@ def main():
         astar = True
     else:
         astar = False
+
+    heuristicType = input("Manhattan Distance/Misplaced Tiles (d/t):")
+    if heuristicType == "d":
+        heuristic = "manhattan"
+    else:
+        heuristic = "misplaced"
 
     print("Searching for solution...")
     solution = a.search(start, goal3, astar, heuristic)
